@@ -3,82 +3,134 @@
 <head>
 	<title>AES-128 Encryption and Decryption</title>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
-	<style>
+		<style>
 		body {
-		  font-family: sans-serif;
-		  margin: 0;
-		  padding: 0;
+			font-family: sans-serif;
+			margin: 0;
+			padding: 0;
 		}
-		
+
 		h1 {
-		  text-align: center;
+			text-align: center;
 		}
 
 		form {
-		  margin: 20px auto;
-		  max-width: 800px;
+			margin: 20px auto;
+			max-width: 800px;
 		}
 
 		label {
-		  display: block;
-		  margin-bottom: 5px;
+			display: block;
+			margin-bottom: 5px;
+			font-size: 18px;
+			font-weight: bold;
+			color: #444;
 		}
 
 		input[type="text"] {
-		  width: 100%;
-		  padding: 10px;
-		  margin-bottom: 10px;
-		  border: none;
-		  border-radius: 3px;
-		  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-		  font-size: 16px;
+			width: 100%;
+			padding: 10px;
+			margin-bottom: 20px;
+			border: none;
+			border-radius: 3px;
+			box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+			font-size: 16px;
 		}
 
 		input[type="submit"] {
-		  background-color: #4CAF50;
-		  color: #fff;
-		  border: none;
-		  border-radius: 3px;
-		  padding: 10px 20px;
-		  font-size: 16px;
-		  cursor: pointer;
+			background-color: #4CAF50;
+			color: #fff;
+			border: none;
+			border-radius: 3px;
+			padding: 10px 20px;
+			font-size: 16px;
+			cursor: pointer;
+			margin-top: 10px;
 		}
-		
+
 		.output {
-		  word-break:break-all;
-		  margin: 20px auto;
-		  max-width: 800px;
-		  min-height: 80px;
-		  padding: 10px;
-		  border: 1px solid #ccc;
-		  border-radius: 3px;
-		  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-		  font-size: 16px;
+			word-break: break-all;
+			margin: 20px auto;
+			max-width: 800px;
+			min-height: 80px;
+			padding: 10px;
+			border: 1px solid #ccc;
+			border-radius: 3px;
+			box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+			font-size: 16px;
+		}
+
+		@media (max-width: 768px) {
+			form {
+				max-width: 500px;
+			}
+
+			input[type="text"], input[type="submit"] {
+				font-size: 14px;
+			}
+
+			h1 {
+				font-size: 24px;
+			}
+
+			label {
+				font-size: 16px;
+			}
+
+			.output {
+				min-height: 60px;
+				font-size: 14px;
+			}
+		}
+
+		@media (max-width: 480px) {
+			form {
+				max-width: 300px;
+			}
+
+			input[type="text"], input[type="submit"] {
+				font-size: 12px;
+			}
+
+			h1 {
+				font-size: 20px;
+			}
+
+			label {
+				font-size: 14px;
+			}
+
+			.output {
+				min-height: 40px;
+				font-size: 12px;
+			}
 		}
 	</style>
 </head>
 <body>
-	<h1>AES-128 암호화 및 복호화</h1>
+	<div class="content">
+		<h1>AES-128 Encryption and Decryption</h1>
 
-	<form id="encryption-form">
-		<label for="input-text">암호화할 텍스트를 입력하세요:</label>
-		<input type="text" id="input-text" name="input-text" required>
-		<label for="key">암호화 키:</label>
-		<input type="text" id="key" name="key" readonly>
-		<input type="submit" value="암호화">
-	</form>
+		<form id="encryption-form">
+			<label for="input-text">Enter text to encrypt:</label>
+			<input type="text" id="input-text" name="input-text" required>
+			<label for="key">key</label>
+			<input type="text" id="key" name="key" readonly>
+			<input type="submit" value="Encrypt">
+		</form>
 
-	<div class="output" id="encrypted-text"></div>
+		<div class="output" id="encrypted-text"></div>
 
-	<form id="decryption-form">
-		<label for="input-encrypted-text">복호화할 텍스트를 입력하세요:</label>
-		<input type="text" id="input-encrypted-text" name="input-encrypted-text" required>
-		<label for="input-key">암호화 키:</label>
-		<input type="text" id="input-key" name="input-key" required>
-		<input type="submit" value="복호화">
-	</form>
+		<form id="decryption-form">
+			<label for="input-encrypted-text">Enter text to decrypt:</label>
+			<input type="text" id="input-encrypted-text" name="input-encrypted-text" required>
+			<label for="input-key">key</label>
+			<input type="text" id="input-key" name="input-key" required>
+			<input type="submit" value="Decrypt">
+		</form>
 
-	<div class="output" id="decrypted-text"></div>
+		<div class="output" id="decrypted-text"></div>
+	</div>
 
 
 
