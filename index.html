@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>AES-128 Encryption and Decryption</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+	<style>
+		body {
+		  font-family: sans-serif;
+		  margin: 0;
+		  padding: 0;
+		}
+		
+		h1 {
+		  text-align: center;
+		}
+
+		form {
+		  margin: 20px auto;
+		  max-width: 800px;
+		}
+
+		label {
+		  display: block;
+		  margin-bottom: 5px;
+		}
+
+		input[type="text"] {
+		  width: 100%;
+		  padding: 10px;
+		  margin-bottom: 10px;
+		  border: none;
+		  border-radius: 3px;
+		  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+		  font-size: 16px;
+		}
+
+		input[type="submit"] {
+		  background-color: #4CAF50;
+		  color: #fff;
+		  border: none;
+		  border-radius: 3px;
+		  padding: 10px 20px;
+		  font-size: 16px;
+		  cursor: pointer;
+		}
+		
+		.output {
+		  word-break:break-all;
+		  margin: 20px auto;
+		  max-width: 800px;
+		  min-height: 80px;
+		  padding: 10px;
+		  border: 1px solid #ccc;
+		  border-radius: 3px;
+		  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+		  font-size: 16px;
+		}
+	</style>
+</head>
+<body>
+	<h1>AES-128 암호화 및 복호화</h1>
+
+	<form id="encryption-form">
+		<label for="input-text">암호화할 텍스트를 입력하세요:</label>
+		<input type="text" id="input-text" name="input-text" required>
+		<label for="key">암호화 키:</label>
+		<input type="text" id="key" name="key" readonly>
+		<input type="submit" value="암호화">
+	</form>
+
+	<div class="output" id="encrypted-text"></div>
+
+	<form id="decryption-form">
+		<label for="input-encrypted-text">복호화할 텍스트를 입력하세요:</label>
+		<input type="text" id="input-encrypted-text" name="input-encrypted-text" required>
+		<label for="input-key">암호화 키:</label>
+		<input type="text" id="input-key" name="input-key" required>
+		<input type="submit" value="복호화">
+	</form>
+
+	<div class="output" id="decrypted-text"></div>
+
+
+
+	<script>
+		// Generate a random encryption key
+		const key = CryptoJS.lib.WordArray.random(16).toString();
+
+		// Display the encryption key in the input field
+		document.getElementById("key").value = key;
+
+		// Add event listener for encryption form submission
+		document.getElementById("encryption-form").addEventListener("submit", function(event) {
+			event.preventDefault();
+
+			// Get the input text and encryption key
+			const inputText = document.getElementById("input-text").value;
+			const key = document.getElementById("key").value;
+
+			// Encrypt the input text using the encryption key
+			const encryptedText = CryptoJS.AES.encrypt(inputText, key).toString();
+
+			// Display the encrypted text
+			document.getElementById("encrypted-text").textContent = encryptedText;
+		});
+
+		// Add event listener for decryption form submission
+		document.getElementById("decryption-form").addEventListener("submit", function(event) {
+			event.preventDefault()
+			
+		// Get the encrypted text and encryption key
+		const encryptedText = document.getElementById("input-encrypted-text").value;
+		const key = document.getElementById("input-key").value;
+
+		// Decrypt the encrypted text using the encryption key
+		const decryptedText = CryptoJS.AES.decrypt(encryptedText, key).toString(CryptoJS.enc.Utf8);
+
+		// Display the decrypted text
+		document.getElementById("decrypted-text").textContent = decryptedText;
+	});
+</script>
+</body>
+</html>
